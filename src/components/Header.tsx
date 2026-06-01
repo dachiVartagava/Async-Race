@@ -1,27 +1,32 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { type RootState } from '../store'; 
 import { setView } from '../store/viewSlice';
 import { generateRandomCars } from '../utils/carGenerator';
+import { carTypelabel } from '../utils/carCreater';
 import { generateCarsApi } from '../api/carApi';
 export interface Car{
     id:number,
     name:string,
     color:string;
 }
-
 export const Header: React.FC = () => {
   const dispatch = useDispatch();
   const currentView = useSelector((state: RootState) => state.view.currentView);
+  const [carName,setCarName] = useState<string>('');
+  const [carColor,setCarColor] = useState<string>('#fffff');
   function startrace(){
 
   }
   function resetgame(){
 
   }
-  function createcars(){
-
-  }
+ async function createcars(){
+  if(!carName.trim()) return;
+ const createcar = carTypelabel(carName,carColor);
+ await generateCarsApi(createcar);
+ setCarName('');
+}
   function  updatecars(){
 
   }
@@ -53,8 +58,8 @@ export const Header: React.FC = () => {
         <button onClick={resetgame}>RESET</button>
         </div>
         <div className="inputelement">
-        <input type="text" placeholder="TYPE CAR BRAND"/>
-        <input type="color" value="#fffff" className="palitra"/>
+        <input type="text" placeholder="TYPE CAR BRAND" value={carName} onChange={(e) => setCarName(e.target.value)}/>
+        <input type="color"  value={carColor} className="palitra" onChange={(e) => setCarColor(e.target.value)}/>
         <button onClick={createcars}>CREATE</button></div>
         <div className="inputelement">
         <input type="text" placeholder="TYPE CAR BRAND"/>
