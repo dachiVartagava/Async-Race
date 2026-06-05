@@ -6,7 +6,7 @@ import { WinnersView } from './views/WinnersView';
 import './index.css';
 
 function App() {
-  // ვკითხულობთ Redux-იდან, რომელი გვერდია აქტიური (სამი r-ით)
+ 
   const currentView = useSelector((state: RootState) => state.view.currentView);
 
   return (

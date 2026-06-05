@@ -9,6 +9,5 @@ export const store = configureStore({
   },
 });
 
-// აი ეს ხაზია ყველაზე მნიშვნელოვანი, რასაც გიწითლებს!
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
